@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    image: vishuddhasamarasekara/calculatorapp:1.1.1
+    ports:
+      - "3040:3040" # change later to 3041
+    environment:
+      - PORT=3040
+    container_name: Calculator_App_1.1.1
+    networks:
+      - my-net
+    restart: always # Restart policy
+    healthcheck:
+      #test: ["CMD", "curl", "-f", "http://localhost:3040/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  my-net:
+    driver: bridge
